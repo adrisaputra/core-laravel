@@ -16,7 +16,7 @@ class SiteHelpers
 
     public static function submenu($id)
     {
-        $submenu = SubMenu::where('menu_id',$id)->where('status',1)->orderBy('position','ASC')->paginate(25)->onEachSide(1);
+        $submenu = SubMenu::where('menu_id',$id)->where('status',1)->orderBy('position','ASC')->get();
         return $submenu;
     }
 
