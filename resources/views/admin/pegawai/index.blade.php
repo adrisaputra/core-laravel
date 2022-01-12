@@ -14,8 +14,11 @@
 	<div class="box">   
 		<div class="box-header with-border">
 			<div class="box-tools pull-left">
+				
 				<div style="padding-top:10px">
+				@can('tambah-data')
 					<a href="{{ url('/'.Request::segment(1).'/create') }}" class="btn btn-success btn-flat" title="Tambah Data">Tambah</a>
+				@endcan
 					<a href="{{ url('/'.Request::segment(1)) }}" class="btn btn-warning btn-flat" title="Refresh halaman">Refresh</a>
 				</div>
 			</div>

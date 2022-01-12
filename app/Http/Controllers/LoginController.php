@@ -14,14 +14,14 @@ class LoginController extends Controller
 
         $user = User::where('name', $request->name)->first();
 
-        if ($user && \Hash::check($request->password, $user->password) && $user->status == 0) {
+        if ($user && \Hash::check($request->password, $user->password) && $user->status == 1) {
             if (Auth::attempt(['name' => $request->name, 'password' => $request->password])) {
                 // Jika berhasil login
 
                 activity()->log('Login');
                 return redirect('/dashboard');
             } 
-        } else if ($user && \Hash::check($request->password, $user->password) && $user->status == 1) {
+        } else if ($user && \Hash::check($request->password, $user->password) && $user->status == 0) {
             return redirect('/')->with('status','User Tidak Aktif, Silahkan Hubungi Admin !');
         } else {
             return redirect('/')->with('status','Nama User atau Password Tidak Sesuai !');

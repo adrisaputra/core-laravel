@@ -17,7 +17,7 @@
 	<div class="box-body">
 			<!-- Small boxes (Stat box) -->
 			<div class="row">
-			@if(Auth::user()->group==1)
+			@if(Auth::user()->group_id==1)
 				<div class="col-lg-6 col-xs-6">
 				<!-- small box -->
 					<div class="small-box bg-blue">
@@ -33,7 +33,7 @@
 					</div>
 				</div>
 				<!-- ./col -->
-			@elseif(Auth::user()->group==2)
+			@elseif(Auth::user()->group_id==2)
 				<div class="col-lg-6 col-xs-6">
 				<!-- small box -->
 					<div class="small-box bg-blue">

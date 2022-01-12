@@ -27,10 +27,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'group',
+        'group_id',
         'foto',
         'status',
-        'bidang_id',
     ];
 
     /**
@@ -67,4 +66,9 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Models\Log');
     }
+    
+    public function group(){
+        return $this->belongsTo(User::class, 'group_id');
+    }
+    
 }

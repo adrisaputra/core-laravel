@@ -150,7 +150,7 @@
                                     </li>
                                 </ul>
                             </li>   
-                            @if(Auth::user()->group==1)
+                            @if(Auth::user()->group_id==1)
                                 <li>
                                     <a href="{{ url('pengaturan') }}" title="Pengaturan Aplikasi"><i class="fa fa-cogs"></i></a>
                                 </li>
@@ -180,6 +180,25 @@
                         <li class="header">MAIN NAVIGATION</li>
 
                             <li class="{{ (request()->is('dashboard*')) ? 'active' : '' }}"><a href="{{ url('dashboard')}}"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
+                            @foreach( SiteHelpers::menu() as $v)
+                                @if($v->link=="#")
+                                <li class="treeview  @foreach( SiteHelpers::submenu($v->id) as $x) {{ (request()->is($x->link.'*')) ? 'active' : '' }} @endforeach">
+                                    <a href="#"> <i class="{{ $v->attribute }}"></i> <span>{{ $v->menu_name }}</span>
+                                        <span class="pull-right-container">
+                                            <i class="fa fa-angle-left pull-right"></i>
+                                        </span>
+                                    </a>
+                                    <ul class="treeview-menu">
+                                        @foreach( SiteHelpers::submenu($v->id) as $x)
+                                            <li class="{{ (request()->is($x->link.'*')) ? 'active' : '' }}"><a href="{{ url($x->link)}}"><i class="fa fa-circle-notch"></i> {{ $x->sub_menu_name }}</a></li>
+                                        @endforeach
+                                    </ul>
+                                </li>  
+                                @else
+                                    <li class="{{ (request()->is($v->link.'*')) ? 'active' : '' }}"><a href="{{ url($v->link)}}"><i class="{{ $v->attribute }}"></i> <span>{{ $v->menu_name }}</span></a></li>
+                                @endif
+                            @endforeach
+                            {{--<li class="{{ (request()->is('dashboard*')) ? 'active' : '' }}"><a href="{{ url('dashboard')}}"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
                             <li class="treeview  {{ (request()->is('rekapitulasi_jumlah_pegawai*','rekapitulasi_jumlah_pegawai_bidang*','rekapitulasi_esselon*','rekapitulasi_gender_bidang*','rekapitulasi_golongan*',
                             'rekapitulasi_pendidikan*','rekapitulasi_asn_aktif*','rekapitulasi_asn_non_aktif*','rekapitulasi_cuti*','rekapitulasi_pensiunan*','rekapitulasi_pensiunan*')) ? 'active' : '' }}">
                                 <a href="#"> <i class="fa fa-database"></i> <span>Rekapitulasi</span>
@@ -192,10 +211,22 @@
                                 </ul>
                             </li>  
                             <li class="{{ (request()->is('pegawai*')) ? 'active' : '' }}"><a href="{{ url('pegawai')}}"><i class="fa fa-circle-notch"></i> <span>Tayangan Data</span></a></li>
+                            --}}
                             <li class="header">CORE BASE</li>
-                            <li class="{{ (request()->is('log*')) ? 'active' : '' }}""><a href="{{ url('log')}}"><i class="fa fa-circle-notch"></i> <span>Log Activity</span></a></li>
-                            @if(Auth::user()->group==1)
-                                <li class="{{ (request()->is('user*')) ? 'active' : '' }}""><a href="{{ url('user')}}"><i class="fa fa-user"></i> <span>User</span></a></li>
+                            <li class="{{ (request()->is('log*')) ? 'active' : '' }}"><a href="{{ url('log')}}"><i class="fa fa-circle-notch"></i> <span>Log Activity</span></a></li>
+                            @if(Auth::user()->group_id==1)
+                                <li class="treeview  {{ (request()->is('user*','group*','menu*')) ? 'active' : '' }}">
+                                    <a href="#"> <i class="fa fa-cogs"></i> <span>Pengaturan</span>
+                                        <span class="pull-right-container">
+                                            <i class="fa fa-angle-left pull-right"></i>
+                                        </span>
+                                    </a>
+                                    <ul class="treeview-menu">
+                                        <li class="{{ (request()->is('user')) ? 'active' : '' }}"><a href="{{ url('user')}}"><i class="fa fa-circle-notch"></i> User</a></li>
+                                        <li class="{{ (request()->is('group')) ? 'active' : '' }}"><a href="{{ url('group')}}"><i class="fa fa-circle-notch"></i> Group</a></li>
+                                        <li class="{{ (request()->is('menu')) ? 'active' : '' }}"><a href="{{ url('menu')}}"><i class="fa fa-circle-notch"></i> Menu</a></li>
+                                    </ul>
+                                </li> 
                             @endif
                         
                     </ul>

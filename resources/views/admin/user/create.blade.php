@@ -53,20 +53,34 @@
 						</div>
 					</div>
 					
-					<div class="form-group @if ($errors->has('group')) has-error @endif">
+					<div class="form-group @if ($errors->has('group_id')) has-error @endif">
 						<label class="col-sm-2 control-label">{{ __('Group') }}</label>
 						<div class="col-sm-10">
-							@if ($errors->has('group'))<label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {{ $errors->first('group') }}</label>@endif
-							<select class="form-control" name="group">
-								<option value="1" @if(old('group')=="1") selected @endif>Administrator</option>
-								<option value="2" @if(old('group')=="2") selected @endif>Operator</option>
-								<!-- <option value="3" @if(old('group')=="3") selected @endif>Pegawai</option> -->
+							@if ($errors->has('group_id'))<label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {{ $errors->first('group_id') }}</label>@endif
+							<select class="form-control" name="group_id">
+								<option value="">- Pilih Group -</option>
+								<option value="1" @if(old('group_id')=="1") selected @endif>Administrator</option>
+								<option value="2" @if(old('group_id')=="2") selected @endif>Operator</option>
+								<!-- <option value="3" @if(old('group_id')=="3") selected @endif>Pegawai</option> -->
+							</select>
+
+						</div>
+					</div>
+	
+					<div class="form-group @if ($errors->has('status')) has-error @endif">
+						<label class="col-sm-2 control-label">{{ __('Status') }}</label>
+						<div class="col-sm-10">
+							@if ($errors->has('status'))<label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {{ $errors->first('status') }}</label>@endif
+							<select class="form-control" name="status">
+								<option value="">- Pilih Status -</option>
+								<option value="1" @if(old('status')=="1") selected @endif>Aktif</option>
+								<option value="0" @if(old('status')=="0") selected @endif>Tidak Aktif</option>
 							</select>
 
 						</div>
 					</div>
 
-					<div class="form-group @if ($errors->has('group')) has-error @endif">
+					<div class="form-group">
 						<label class="col-sm-2 control-label"></label>
 						<div class="col-sm-10">
 							<div>

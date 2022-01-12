@@ -11,20 +11,22 @@
 	</section>
 	
 	<section class="content">
+
 	<div class="box">   
 		<div class="box-header with-border">
 			<div class="box-tools pull-left">
 				<div style="padding-top:10px">
-					<a href="{{ url('/'.Request::segment(1).'/create') }}" class="btn btn-success btn-flat" title="Tambah Data">Tambah</a>
-					<a href="{{ url('/'.Request::segment(1)) }}" class="btn btn-warning btn-flat" title="Refresh halaman">Refresh</a>    
+					<a href="{{ url('/'.Request::segment(1).'/create/'.$menu->id) }}" class="btn btn-success btn-flat" title="Tambah Data">Tambah</a>
+					<a href="{{ url('/'.Request::segment(1).'/'.$menu->id) }}" class="btn btn-warning btn-flat" title="Refresh halaman">Refresh</a>    
+					<a href="{{ url('/menu') }}" class="btn btn-danger btn-flat" title="Refresh halaman">Kembali</a>  
 				</div>
 			</div>
 			<div class="box-tools pull-right">
 				<div class="form-inline">
 					<form action="{{ url('/'.Request::segment(1).'/search') }}" method="GET">
-						<div class="input-group margin">
+						<div class="input-submenu margin">
 							<input type="text" class="form-control" name="search" placeholder="Masukkan kata kunci pencarian">
-							<span class="input-group-btn">
+							<span class="input-submenu-btn">
 								<button type="submit" class="btn btn-danger btn-flat">cari</button>
 							</span>
 						</div>
@@ -46,24 +48,18 @@
 				<table class="table table-bordered">
 					<tr style="background-color: gray;color:white">
 						<th style="width: 60px">No</th>
-						<th>Nama User</th>
-						<th>Email</th>
-						<th>Group</th>
+						<th>Nama Sub Menu</th>
+						<th>Link</th>
+						<th>Atribute</th>
 						<th>Status</th>
-						<th style="width: 20%">#aksi</th>
+						<th style="width: 15%">#Aksi</th>
 					</tr>
-					@foreach($user as $v)
+					@foreach($submenu as $v)
 					<tr>
-						<td>{{ ($user ->currentpage()-1) * $user ->perpage() + $loop->index + 1 }}</td>
-						<td>{{ $v->name }}</td>
-						<td>{{ $v->email }}</td>
-						<td>
-							@if ($v->group_id==1)
-								<span class="label label-danger">Administrator</span>
-							@elseif  ($v->group_id==2)
-								<span class="label label-warning">Operator</span>
-							@endif
-						</td>
+						<td>{{ ($submenu ->currentpage()-1) * $submenu ->perpage() + $loop->index + 1 }}</td>
+						<td>{{ $v->sub_menu_name }}</td>
+						<td>{{ $v->link }}</td>
+						<td>{{ $v->attribute }}</td>
 						<td>
 							@if ($v->status==0)
 								<span class="label label-danger">Tidak Aktif</span>
@@ -72,10 +68,8 @@
 							@endif
 						</td>
 						<td>
-							<a href="{{ url('/'.Request::segment(1).'/edit/'.$v->id ) }}" class="btn btn-xs btn-flat btn-warning">Edit</a>
-							@if ($v->id!=1)
-								<a href="{{ url('/'.Request::segment(1).'/hapus/'.$v->id ) }}" class="btn btn-xs btn-flat btn-danger" onclick="return confirm('Anda Yakin ?');">Hapus</a>
-							@endif
+							<a href="{{ url('/'.Request::segment(1).'/edit/'.$menu->id.'/'.$v->id ) }}" class="btn btn-xs btn-flat btn-warning">Edit</a>
+							<a href="{{ url('/'.Request::segment(1).'/hapus/'.$menu->id.'/'.$v->id ) }}" class="btn btn-xs btn-flat btn-danger"  onclick="return confirm('Anda Yakin ?');">Hapus</a>
 						</td>
 					</tr>
 					@endforeach
@@ -84,7 +78,7 @@
 			</div>
 		<div class="box-footer">
 			<!-- PAGINATION -->
-			<div class="float-right">{{ $user->appends(Request::only('search'))->links() }}</div>
+			<div class="float-right">{{ $submenu->appends(Request::only('search'))->links() }}</div>
 		</div>
 	</div>
 	</section>

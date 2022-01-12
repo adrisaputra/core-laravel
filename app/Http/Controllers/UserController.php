@@ -21,7 +21,7 @@ class UserController extends Controller
     public function index()
     {
         $title = "User";
-		$user = DB::table('users')->where('status',0)->orderBy('id','DESC')->paginate(10);
+		$user = DB::table('users')->orderBy('id','DESC')->paginate(10);
 		return view('admin.user.index',compact('title','user'));
     }
 	
@@ -30,7 +30,7 @@ class UserController extends Controller
     {
         $title = "User";
         $user = $request->get('search');
-		$user = User::where('status',0)->where('name', 'LIKE', '%'.$user.'%')->orderBy('id','DESC')->paginate(10);
+		$user = User::where('name', 'LIKE', '%'.$user.'%')->orderBy('id','DESC')->paginate(10);
 		return view('admin.user.index',compact('title','user'));
     }
 	
@@ -50,13 +50,15 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'group' => 'required'
+            'group_id' => 'required',
+            'status' => 'required'
 		]);
 		
         $input['name'] = $request->name;
         $input['email'] = $request->email;
         $input['password'] = Hash::make($request->password);
-        $input['group'] = $request->group;
+        $input['group_id'] = $request->group_id;
+        $input['status'] = $request->status;
         User::create($input);
 		
         activity()->log('Tambah Data User');
@@ -76,7 +78,7 @@ class UserController extends Controller
 	## Edit Data
     public function update(Request $request, User $user)
     {
-        if($request->group==2){
+        if($request->group_id==2){
             if($request->password){
                 $this->validate($request, [
                     'password' => 'required|string|min:8|confirmed'
@@ -99,11 +101,13 @@ class UserController extends Controller
             $user->name = $request->name;
             $user->email = $request->email;
             $user->password = Hash::make($request->password);
-            $user->group = $request->group;
+            $user->group_id = $request->group_id;
+            $user->status = $request->status;
 		} else {
             $user->name = $request->name;
             $user->email = $request->email;
-            $user->group = $request->group;
+            $user->group_id = $request->group_id;
+            $user->status = $request->status;
         }
         $user->save();
         

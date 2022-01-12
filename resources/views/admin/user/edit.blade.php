@@ -62,18 +62,31 @@
 					</div>
 
 					@if($user->group !="3")
-					<div class="form-group @if ($errors->has('group')) has-error @endif">
+					<div class="form-group @if ($errors->has('group_id')) has-error @endif">
 						<label class="col-sm-2 control-label">{{ __('Group') }}</label>
 						<div class="col-sm-10">
-							@if ($errors->has('group'))<label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {{ $errors->first('group') }}</label>@endif
-							<select class="form-control" name="group">
-								<option value="1" @if($user->group =="1") selected @endif>Administrator</option>
-								<option value="2" @if($user->group =="2") selected @endif>Operator</option>
+							@if ($errors->has('group_id'))<label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {{ $errors->first('group_id') }}</label>@endif
+							<select class="form-control" name="group_id">
+								<option value="1" @if($user->group_id =="1") selected @endif>Administrator</option>
+								<option value="2" @if($user->group_id =="2") selected @endif>Operator</option>
 							</select>
 
 						</div>
 					</div>
 					@endif
+
+					<div class="form-group @if ($errors->has('status')) has-error @endif">
+						<label class="col-sm-2 control-label">{{ __('Status') }}</label>
+						<div class="col-sm-10">
+							@if ($errors->has('status'))<label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {{ $errors->first('status') }}</label>@endif
+							<select class="form-control" name="status">
+								<option value="">- Pilih Status -</option>
+								<option value="1" @if($user->status=="1") selected @endif>Aktif</option>
+								<option value="0" @if($user->status=="0") selected @endif>Tidak Aktif</option>
+							</select>
+
+						</div>
+					</div>
 
 					<div class="form-group @if ($errors->has('group')) has-error @endif">
 						<label class="col-sm-2 control-label"></label>

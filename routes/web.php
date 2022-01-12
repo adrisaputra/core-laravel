@@ -7,6 +7,9 @@ use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\RekapitulasiController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\PengaturanController;
+use App\Http\Controllers\GroupController;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\SubMenuController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -50,6 +53,33 @@ Route::get('/pegawai/hapus/{pegawai}',[PegawaiController::class, 'delete']);
 
 ## Rekapitulasi
 Route::get('/rekapitulasi_jumlah_pegawai', [RekapitulasiController::class, 'rekapitulasi_jumlah_pegawai']);
+
+## Group
+Route::get('/group', [GroupController::class, 'index']);
+Route::get('/group/search', [GroupController::class, 'search']);
+Route::get('/group/create', [GroupController::class, 'create']);
+Route::post('/group', [GroupController::class, 'store']);
+Route::get('/group/edit/{group}', [GroupController::class, 'edit']);
+Route::put('/group/edit/{group}', [GroupController::class, 'update']);
+Route::get('/group/hapus/{group}',[GroupController::class, 'delete']);
+
+## Menu
+Route::get('/menu/', [MenuController::class, 'index']);
+Route::get('/menu/search', [MenuController::class, 'search']);
+Route::get('/menu/create', [MenuController::class, 'create']);
+Route::post('/menu', [MenuController::class, 'store']);
+Route::get('/menu/edit/{menu}', [MenuController::class, 'edit']);
+Route::put('/menu/edit/{menu}', [MenuController::class, 'update']);
+Route::get('/menu/hapus/{menu}',[MenuController::class, 'delete']);
+
+## Sub Menu
+Route::get('/submenu/{id}', [SubMenuController::class, 'index']);
+Route::get('/submenu/search/{id}', [SubMenuController::class, 'search']);
+Route::get('/submenu/create/{id}', [SubMenuController::class, 'create']);
+Route::post('/submenu/{id}', [SubMenuController::class, 'store']);
+Route::get('/submenu/edit/{id}/{submenu}', [SubMenuController::class, 'edit']);
+Route::put('/submenu/edit/{id}/{submenu}', [SubMenuController::class, 'update']);
+Route::get('/submenu/hapus/{id}/{submenu}',[SubMenuController::class, 'delete']);
 
 ## User
 Route::get('/user', [UserController::class, 'index']);

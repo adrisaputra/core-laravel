@@ -36,7 +36,7 @@
 						<label class="col-sm-3 control-label">{{ __('Nama User') }}</label>
 						<div class="col-sm-9">
 							@if ($errors->has('name'))<label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {{ $errors->first('name') }}</label>@endif
-							@if(Auth::user()->group==3)
+							@if(Auth::user()->group_id==3)
 								<input type="text" class="form-control" placeholder="Nama User" value="{{ $user->name }}" disabled>
 								<input type="hidden" class="form-control" placeholder="Nama User" name="name" value="{{ $user->name }}" >
 							@else

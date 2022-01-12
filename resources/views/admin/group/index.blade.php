@@ -16,7 +16,7 @@
 			<div class="box-tools pull-left">
 				<div style="padding-top:10px">
 					<a href="{{ url('/'.Request::segment(1).'/create') }}" class="btn btn-success btn-flat" title="Tambah Data">Tambah</a>
-					<a href="{{ url('/'.Request::segment(1)) }}" class="btn btn-warning btn-flat" title="Refresh halaman">Refresh</a>    
+					<a href="{{ url('/'.Request::segment(1)) }}" class="btn btn-warning btn-flat" title="Refresh halaman">Refresh</a>
 				</div>
 			</div>
 			<div class="box-tools pull-right">
@@ -46,36 +46,17 @@
 				<table class="table table-bordered">
 					<tr style="background-color: gray;color:white">
 						<th style="width: 60px">No</th>
-						<th>Nama User</th>
-						<th>Email</th>
-						<th>Group</th>
-						<th>Status</th>
-						<th style="width: 20%">#aksi</th>
+						<th>Nama Grup</th>
+						<th style="width: 15%">#aksi</th>
 					</tr>
-					@foreach($user as $v)
+					@foreach($group as $v)
 					<tr>
-						<td>{{ ($user ->currentpage()-1) * $user ->perpage() + $loop->index + 1 }}</td>
-						<td>{{ $v->name }}</td>
-						<td>{{ $v->email }}</td>
+						<td>{{ ($group ->currentpage()-1) * $group ->perpage() + $loop->index + 1 }}</td>
+						<td>{{ $v->user->name }}</td>
 						<td>
-							@if ($v->group_id==1)
-								<span class="label label-danger">Administrator</span>
-							@elseif  ($v->group_id==2)
-								<span class="label label-warning">Operator</span>
-							@endif
-						</td>
-						<td>
-							@if ($v->status==0)
-								<span class="label label-danger">Tidak Aktif</span>
-							@elseif  ($v->status==1)
-								<span class="label label-success">Aktif</span>
-							@endif
-						</td>
-						<td>
+							<a href="{{ url('/'.Request::segment(1).'/edit/'.$v->id ) }}" class="btn btn-xs btn-flat btn-info">Hak Akses</a>
 							<a href="{{ url('/'.Request::segment(1).'/edit/'.$v->id ) }}" class="btn btn-xs btn-flat btn-warning">Edit</a>
-							@if ($v->id!=1)
-								<a href="{{ url('/'.Request::segment(1).'/hapus/'.$v->id ) }}" class="btn btn-xs btn-flat btn-danger" onclick="return confirm('Anda Yakin ?');">Hapus</a>
-							@endif
+							<a href="{{ url('/'.Request::segment(1).'/hapus/'.$v->id ) }}" class="btn btn-xs btn-flat btn-danger"  onclick="return confirm('Anda Yakin ?');">Hapus</a>
 						</td>
 					</tr>
 					@endforeach
@@ -84,7 +65,7 @@
 			</div>
 		<div class="box-footer">
 			<!-- PAGINATION -->
-			<div class="float-right">{{ $user->appends(Request::only('search'))->links() }}</div>
+			<div class="float-right">{{ $group->appends(Request::only('search'))->links() }}</div>
 		</div>
 	</div>
 	</section>
