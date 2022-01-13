@@ -18,16 +18,16 @@
 		
 		<form action="{{ url('/'.Request::segment(1).'/edit/'.$group->id) }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
 		{{ csrf_field() }}
-		<input type="hidden" name="_method" value="PUT">
+		<input type="hidden" group_name="_method" value="PUT">
 		
 			<div class="box-body">
 				<div class="col-lg-12">
 
-					<div class="form-group @if ($errors->has('name')) has-error @endif">
+					<div class="form-group @if ($errors->has('group_name')) has-error @endif">
 						<label class="col-sm-2 control-label">{{ __('Nama Grup') }} <span class="required" style="color: #dd4b39;">*</span></label>
 						<div class="col-sm-10">
-							@if ($errors->has('name'))<label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {{ $errors->first('name') }}</label>@endif
-							<input type="text" class="form-control" placeholder="Nama Grup" name="name" value="{{ $group->name }}" >
+							@if ($errors->has('group_name'))<label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {{ $errors->first('group_name') }}</label>@endif
+							<input type="text" class="form-control" placeholder="Nama Grup" name="group_name" value="{{ $group->group_name }}" >
 						
 							<div style="padding-top:10px">
 								<button type="submit" class="btn btn-primary btn-flat btn-sm" title="Tambah Data"> Simpan</button>

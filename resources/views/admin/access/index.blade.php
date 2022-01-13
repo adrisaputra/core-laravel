@@ -11,12 +11,14 @@
 	</section>
 	
 	<section class="content">
+
 	<div class="box">   
 		<div class="box-header with-border">
 			<div class="box-tools pull-left">
 				<div style="padding-top:10px">
-					<a href="{{ url('/'.Request::segment(1).'/create') }}" class="btn btn-success btn-flat" title="Tambah Data">Tambah</a>
-					<a href="{{ url('/'.Request::segment(1)) }}" class="btn btn-warning btn-flat" title="Refresh halaman">Refresh</a>
+					<a href="{{ url('/'.Request::segment(1).'/create/'.$group->id) }}" class="btn btn-success btn-flat" title="Tambah Data">Tambah</a>
+					<a href="{{ url('/'.Request::segment(1).'/'.$group->id) }}" class="btn btn-warning btn-flat" title="Refresh halaman">Refresh</a>    
+					<a href="{{ url('/group') }}" class="btn btn-danger btn-flat" title="Refresh halaman">Kembali</a>  
 				</div>
 			</div>
 			<div class="box-tools pull-right">
@@ -46,17 +48,26 @@
 				<table class="table table-bordered">
 					<tr style="background-color: gray;color:white">
 						<th style="width: 60px">No</th>
-						<th>Nama Grup</th>
-						<th style="width: 15%">#aksi</th>
+						<th>Nama Menu</th>
+						<th>Create</th>
+						<th>Read</th>
+						<th>Update</th>
+						<th>Delete</th>
+						<th>Print</th>
+						<th style="width: 15%">#Aksi</th>
 					</tr>
-					@foreach($group as $v)
+					@foreach($access as $v)
 					<tr>
-						<td>{{ ($group ->currentpage()-1) * $group ->perpage() + $loop->index + 1 }}</td>
-						<td>{{ $v->group_name }}</td>
+						<td>{{ ($access ->currentpage()-1) * $access ->perpage() + $loop->index + 1 }}</td>
+						<td>{{ $v->menu->menu_name }}</td>
+						<td>{{ $v->create }}</td>
+						<td>{{ $v->read }}</td>
+						<td>{{ $v->update }}</td>
+						<td>{{ $v->delete }}</td>
+						<td>{{ $v->print }}</td>
 						<td>
-							<a href="{{ url('/akses/'.$v->id ) }}" class="btn btn-xs btn-flat btn-info">Hak Akses</a>
-							<a href="{{ url('/'.Request::segment(1).'/edit/'.$v->id ) }}" class="btn btn-xs btn-flat btn-warning">Edit</a>
-							<a href="{{ url('/'.Request::segment(1).'/hapus/'.$v->id ) }}" class="btn btn-xs btn-flat btn-danger"  onclick="return confirm('Anda Yakin ?');">Hapus</a>
+							<a href="{{ url('/'.Request::segment(1).'/edit/'.$group->id.'/'.$v->id ) }}" class="btn btn-xs btn-flat btn-warning">Edit</a>
+							<a href="{{ url('/'.Request::segment(1).'/hapus/'.$group->id.'/'.$v->id ) }}" class="btn btn-xs btn-flat btn-danger"  onclick="return confirm('Anda Yakin ?');">Hapus</a>
 						</td>
 					</tr>
 					@endforeach
@@ -65,7 +76,7 @@
 			</div>
 		<div class="box-footer">
 			<!-- PAGINATION -->
-			<div class="float-right">{{ $group->appends(Request::only('search'))->links() }}</div>
+			<div class="float-right">{{ $access->appends(Request::only('search'))->links() }}</div>
 		</div>
 	</div>
 	</section>

@@ -8,6 +8,7 @@ use App\Http\Controllers\RekapitulasiController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\PengaturanController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\AccessController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\SubMenuController;
 use App\Http\Controllers\UserController;
@@ -62,6 +63,15 @@ Route::post('/group', [GroupController::class, 'store']);
 Route::get('/group/edit/{group}', [GroupController::class, 'edit']);
 Route::put('/group/edit/{group}', [GroupController::class, 'update']);
 Route::get('/group/hapus/{group}',[GroupController::class, 'delete']);
+
+## Akses
+Route::get('/akses/{id}', [AccessController::class, 'index']);
+Route::get('/akses/search/{id}', [AccessController::class, 'search']);
+Route::get('/akses/create/{id}', [AccessController::class, 'create']);
+Route::post('/akses/{id}', [AccessController::class, 'store']);
+Route::get('/akses/edit/{id}/{akses}', [AccessController::class, 'edit']);
+Route::put('/akses/edit/{id}/{akses}', [AccessController::class, 'update']);
+Route::get('/akses/hapus/{id}/{akses}',[AccessController::class, 'delete']);
 
 ## Menu
 Route::get('/menu/', [MenuController::class, 'index']);

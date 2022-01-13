@@ -30,7 +30,7 @@ class GroupController extends Controller
     {
         $title = "Group";
         $group = $request->get('search');
-        $group = Group::where('name', 'LIKE', '%'.$group.'%')
+        $group = Group::where('group_name', 'LIKE', '%'.$group.'%')
                 ->orderBy('id','DESC')->paginate(25)->onEachSide(1);
         
         return view('admin.group.index',compact('title','group'));
@@ -49,10 +49,10 @@ class GroupController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'group_name' => 'required',
         ]);
 
-		$input['name'] = $request->name;
+		$input['group_name'] = $request->group_name;
 		$input['user_id'] = Auth::user()->id;
 		
         Group::create($input);
@@ -74,7 +74,7 @@ class GroupController extends Controller
     public function update(Request $request, Group $group)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'group_name' => 'required',
         ]);
 
         $group->fill($request->all());

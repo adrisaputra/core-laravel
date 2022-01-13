@@ -4,13 +4,33 @@ namespace App\Helpers;
 
 use App\Models\Menu;   //nama model
 use App\Models\SubMenu;   //nama model
+use App\Models\Access;   //nama model
+use Illuminate\Support\Facades\Auth;
 
 class SiteHelpers
 {
     
-    public static function menu()
+    public static function config_menu()
     {
-        $menu = Menu::where('status',1)->orderBy('position','ASC')->get();
+        $menu = Access::leftJoin('group_tbl', 'access_tbl.group_id', '=', 'group_tbl.id')
+                ->leftJoin('menu_tbl', 'access_tbl.menu_id', '=', 'menu_tbl.id')
+                ->where('access_tbl.group_id',Auth::user()->group_id)
+                ->where('menu_tbl.status',1)
+                ->where('menu_tbl.category',1)
+                ->orderBy('menu_tbl.position','ASC')
+                ->get();
+        return $menu;
+    }
+
+    public static function main_menu()
+    {
+        $menu = Access::leftJoin('group_tbl', 'access_tbl.group_id', '=', 'group_tbl.id')
+                ->leftJoin('menu_tbl', 'access_tbl.menu_id', '=', 'menu_tbl.id')
+                ->where('access_tbl.group_id',Auth::user()->group_id)
+                ->where('menu_tbl.status',1)
+                ->where('menu_tbl.category',2)
+                ->orderBy('menu_tbl.position','ASC')
+                ->get();
         return $menu;
     }
 

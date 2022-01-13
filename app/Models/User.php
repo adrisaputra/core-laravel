@@ -70,5 +70,10 @@ class User extends Authenticatable
     public function group(){
         return $this->belongsTo(User::class, 'group_id');
     }
+
+    public function access()
+    {
+        return $this->hasOne('App\Models\Access');
+    }
     
 }

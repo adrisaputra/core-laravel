@@ -11,11 +11,6 @@ class Group extends Model
 	protected $table = 'group_tbl';
 	protected $fillable =[
         'name',
-        'read',
-        'create',
-        'update',
-        'delete',
-        'print',
         'user_id'
     ];
 
@@ -24,5 +19,8 @@ class Group extends Model
         return $this->hasOne('App\Models\User');
     }
     
-
+    public function access()
+    {
+        return $this->hasOne('App\Models\Access');
+    }
 }

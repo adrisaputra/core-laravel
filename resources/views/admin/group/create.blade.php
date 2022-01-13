@@ -21,11 +21,11 @@
 			<div class="box-body">
 				<div class="col-lg-12">
 					
-					<div class="form-group @if ($errors->has('name')) has-error @endif">
+					<div class="form-group @if ($errors->has('group_name')) has-error @endif">
 						<label class="col-sm-2 control-label">{{ __('Nama Grup') }} <span class="required" style="color: #dd4b39;">*</span></label>
 						<div class="col-sm-10">
-							@if ($errors->has('name'))<label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {{ $errors->first('name') }}</label>@endif
-							<input type="text" class="form-control" placeholder="Nama Grup" name="name" value="{{ old('name') }}" >
+							@if ($errors->has('group_name'))<label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {{ $errors->first('group_name') }}</label>@endif
+							<input type="text" class="form-control" placeholder="Nama Grup" name="group_name" value="{{ old('group_name') }}" >
 						</div>
 					</div>
 
