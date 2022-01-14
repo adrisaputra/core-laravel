@@ -4,7 +4,7 @@ namespace App\Helpers;
 
 use App\Models\Menu;   //nama model
 use App\Models\SubMenu;   //nama model
-use App\Models\Access;   //nama model
+use App\Models\MenuAccess;   //nama model
 use Illuminate\Support\Facades\Auth;
 
 class SiteHelpers
@@ -12,9 +12,9 @@ class SiteHelpers
     
     public static function config_menu()
     {
-        $menu = Access::leftJoin('group_tbl', 'access_tbl.group_id', '=', 'group_tbl.id')
-                ->leftJoin('menu_tbl', 'access_tbl.menu_id', '=', 'menu_tbl.id')
-                ->where('access_tbl.group_id',Auth::user()->group_id)
+        $menu = MenuAccess::leftJoin('group_tbl', 'menu_access_tbl.group_id', '=', 'group_tbl.id')
+                ->leftJoin('menu_tbl', 'menu_access_tbl.menu_id', '=', 'menu_tbl.id')
+                ->where('menu_access_tbl.group_id',Auth::user()->group_id)
                 ->where('menu_tbl.status',1)
                 ->where('menu_tbl.category',1)
                 ->orderBy('menu_tbl.position','ASC')
@@ -24,9 +24,9 @@ class SiteHelpers
 
     public static function main_menu()
     {
-        $menu = Access::leftJoin('group_tbl', 'access_tbl.group_id', '=', 'group_tbl.id')
-                ->leftJoin('menu_tbl', 'access_tbl.menu_id', '=', 'menu_tbl.id')
-                ->where('access_tbl.group_id',Auth::user()->group_id)
+        $menu = MenuAccess::leftJoin('group_tbl', 'menu_access_tbl.group_id', '=', 'group_tbl.id')
+                ->leftJoin('menu_tbl', 'menu_access_tbl.menu_id', '=', 'menu_tbl.id')
+                ->where('menu_access_tbl.group_id',Auth::user()->group_id)
                 ->where('menu_tbl.status',1)
                 ->where('menu_tbl.category',2)
                 ->orderBy('menu_tbl.position','ASC')

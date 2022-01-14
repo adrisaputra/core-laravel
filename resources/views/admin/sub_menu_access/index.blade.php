@@ -16,17 +16,17 @@
 		<div class="box-header with-border">
 			<div class="box-tools pull-left">
 				<div style="padding-top:10px">
-					<a href="{{ url('/'.Request::segment(1).'/create/'.$group->id) }}" class="btn btn-success btn-flat" title="Tambah Data">Tambah</a>
-					<a href="{{ url('/'.Request::segment(1).'/'.$group->id) }}" class="btn btn-warning btn-flat" title="Refresh halaman">Refresh</a>    
-					<a href="{{ url('/group') }}" class="btn btn-danger btn-flat" title="Refresh halaman">Kembali</a>  
+					<a href="{{ url('/'.Request::segment(1).'/create/'.$group->id.'/'.$menu->id) }}" class="btn btn-success btn-flat" title="Tambah Data">Tambah</a>
+					<a href="{{ url('/'.Request::segment(1).'/'.$group->id.'/'.$menu->id) }}" class="btn btn-warning btn-flat" title="Refresh halaman">Refresh</a>    
+					<a href="{{ url('/menu_akses/'.$group->id) }}" class="btn btn-danger btn-flat" title="Refresh halaman">Kembali</a>  
 				</div>
 			</div>
 			<div class="box-tools pull-right">
 				<div class="form-inline">
 					<form action="{{ url('/'.Request::segment(1).'/search') }}" method="GET">
-						<div class="input-group margin">
+						<div class="input-sub_menu_access margin">
 							<input type="text" class="form-control" name="search" placeholder="Masukkan kata kunci pencarian">
-							<span class="input-group-btn">
+							<span class="input-sub_menu_access-btn">
 								<button type="submit" class="btn btn-danger btn-flat">cari</button>
 							</span>
 						</div>
@@ -48,26 +48,26 @@
 				<table class="table table-bordered">
 					<tr style="background-color: gray;color:white">
 						<th style="width: 60px">No</th>
-						<th>Nama Menu</th>
+						<th>Nama Sub Menu</th>
 						<th>Create</th>
 						<th>Read</th>
 						<th>Update</th>
 						<th>Delete</th>
 						<th>Print</th>
-						<th style="width: 15%">#Aksi</th>
+						<th style="width: 20%">#Aksi</th>
 					</tr>
-					@foreach($access as $v)
+					@foreach($sub_menu_access as $v)
 					<tr>
-						<td>{{ ($access ->currentpage()-1) * $access ->perpage() + $loop->index + 1 }}</td>
-						<td>{{ $v->menu->menu_name }}</td>
+						<td>{{ ($sub_menu_access ->currentpage()-1) * $sub_menu_access ->perpage() + $loop->index + 1 }}</td>
+						<td>{{ $v->sub_menu_name }}</td>
 						<td>{{ $v->create }}</td>
 						<td>{{ $v->read }}</td>
 						<td>{{ $v->update }}</td>
 						<td>{{ $v->delete }}</td>
 						<td>{{ $v->print }}</td>
 						<td>
-							<a href="{{ url('/'.Request::segment(1).'/edit/'.$group->id.'/'.$v->id ) }}" class="btn btn-xs btn-flat btn-warning">Edit</a>
-							<a href="{{ url('/'.Request::segment(1).'/hapus/'.$group->id.'/'.$v->id ) }}" class="btn btn-xs btn-flat btn-danger"  onclick="return confirm('Anda Yakin ?');">Hapus</a>
+							<a href="{{ url('/'.Request::segment(1).'/edit/'.$group->id.'/'.$menu->id.'/'.$v->id ) }}" class="btn btn-xs btn-flat btn-warning">Edit</a>
+							<a href="{{ url('/'.Request::segment(1).'/hapus/'.$group->id.'/'.$menu->id.'/'.$v->id ) }}" class="btn btn-xs btn-flat btn-danger"  onclick="return confirm('Anda Yakin ?');">Hapus</a>
 						</td>
 					</tr>
 					@endforeach
@@ -76,7 +76,7 @@
 			</div>
 		<div class="box-footer">
 			<!-- PAGINATION -->
-			<div class="float-right">{{ $access->appends(Request::only('search'))->links() }}</div>
+			<div class="float-right">{{ $sub_menu_access->appends(Request::only('search'))->links() }}</div>
 		</div>
 	</div>
 	</section>

@@ -8,8 +8,9 @@ use App\Http\Controllers\RekapitulasiController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\PengaturanController;
 use App\Http\Controllers\GroupController;
-use App\Http\Controllers\AccessController;
+use App\Http\Controllers\MenuAccessController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\SubMenuAccessController;
 use App\Http\Controllers\SubMenuController;
 use App\Http\Controllers\UserController;
 
@@ -64,14 +65,14 @@ Route::get('/group/edit/{group}', [GroupController::class, 'edit']);
 Route::put('/group/edit/{group}', [GroupController::class, 'update']);
 Route::get('/group/hapus/{group}',[GroupController::class, 'delete']);
 
-## Akses
-Route::get('/akses/{id}', [AccessController::class, 'index']);
-Route::get('/akses/search/{id}', [AccessController::class, 'search']);
-Route::get('/akses/create/{id}', [AccessController::class, 'create']);
-Route::post('/akses/{id}', [AccessController::class, 'store']);
-Route::get('/akses/edit/{id}/{akses}', [AccessController::class, 'edit']);
-Route::put('/akses/edit/{id}/{akses}', [AccessController::class, 'update']);
-Route::get('/akses/hapus/{id}/{akses}',[AccessController::class, 'delete']);
+## Menu Akses
+Route::get('/menu_akses/{group}', [MenuAccessController::class, 'index']);
+Route::get('/menu_akses/search/{group}', [MenuAccessController::class, 'search']);
+Route::get('/menu_akses/create/{group}', [MenuAccessController::class, 'create']);
+Route::post('/menu_akses/{group}', [MenuAccessController::class, 'store']);
+Route::get('/menu_akses/edit/{group}/{menu_access}', [MenuAccessController::class, 'edit']);
+Route::put('/menu_akses/edit/{group}/{menu_access}', [MenuAccessController::class, 'update']);
+Route::get('/menu_akses/hapus/{group}/{menu_access}',[MenuAccessController::class, 'delete']);
 
 ## Menu
 Route::get('/menu/', [MenuController::class, 'index']);
@@ -81,6 +82,15 @@ Route::post('/menu', [MenuController::class, 'store']);
 Route::get('/menu/edit/{menu}', [MenuController::class, 'edit']);
 Route::put('/menu/edit/{menu}', [MenuController::class, 'update']);
 Route::get('/menu/hapus/{menu}',[MenuController::class, 'delete']);
+
+## Sub Menu Akses
+Route::get('/sub_menu_akses/{group}/{menu}', [SubMenuAccessController::class, 'index']);
+Route::get('/sub_menu_akses/search/{group}/{menu}', [SubMenuAccessController::class, 'search']);
+Route::get('/sub_menu_akses/create/{group}/{menu}', [SubMenuAccessController::class, 'create']);
+Route::post('/sub_menu_akses/{group}/{menu}', [SubMenuAccessController::class, 'store']);
+Route::get('/sub_menu_akses/edit/{group}/{menu}/{sub_menu_access}', [SubMenuAccessController::class, 'edit']);
+Route::put('/sub_menu_akses/edit/{group}/{menu}/{sub_menu_access}', [SubMenuAccessController::class, 'update']);
+Route::get('/sub_menu_akses/hapus/{group}/{menu}/{sub_menu_access}',[SubMenuAccessController::class, 'delete']);
 
 ## Sub Menu
 Route::get('/submenu/{id}', [SubMenuController::class, 'index']);

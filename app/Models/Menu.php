@@ -15,6 +15,7 @@ class Menu extends Model
         'link',
         'position',
         'desc',
+        'category',
         'status',
         'user_id'
     ];

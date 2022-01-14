@@ -65,6 +65,7 @@ class MenuController extends Controller
 		$input['attribute'] = $request->attribute;
 		$input['position'] = $request->position;
 		$input['desc'] = $request->desc;
+		$input['category'] = 2;
 		$input['status'] = $request->status;
 		$input['user_id'] = Auth::user()->id;
 		

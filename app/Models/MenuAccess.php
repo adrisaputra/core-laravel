@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Access extends Model
+class MenuAccess extends Model
 {
     // use HasFactory;
-	protected $table = 'access_tbl';
+	protected $table = 'menu_access_tbl';
 	protected $fillable =[
         'group_id',
         'menu_id',

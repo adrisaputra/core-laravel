@@ -67,8 +67,12 @@
 						@endif
 						</td>
 						<td>
-							<a href="{{ url('/'.Request::segment(1).'/edit/'.$v->id ) }}" class="btn btn-xs btn-warning btn-block">Edit</a>
-							<a href="{{ url('/'.Request::segment(1).'/hapus/'.$v->id ) }}" class="btn btn-xs btn-danger btn-block"  onclick="return confirm('Anda Yakin ?');">Hapus</a>
+							@can('ubah-data')
+								<a href="{{ url('/'.Request::segment(1).'/edit/'.$v->id ) }}" class="btn btn-xs btn-warning btn-block">Edit</a>
+							@endcan
+							@can('hapus-data')
+								<a href="{{ url('/'.Request::segment(1).'/hapus/'.$v->id ) }}" class="btn btn-xs btn-danger btn-block"  onclick="return confirm('Anda Yakin ?');">Hapus</a>
+							@endcan
 						</td>
 					</tr>
 

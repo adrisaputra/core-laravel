@@ -16,7 +16,7 @@
 			<h3 class="box-title">Tambah {{ __($title) }}</h3>
 		</div>
 		
-		<form action="{{ url('/'.Request::segment(1).'/'.$menu->id) }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
+		<form action="{{ url('/'.Request::segment(1)) }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
 		{{ csrf_field() }}
 			<div class="box-body">
 				<div class="col-lg-12">
@@ -25,15 +25,7 @@
 						<label class="col-sm-2 control-label">{{ __('Nama Menu') }} <span class="required" style="color: #dd4b39;">*</span></label>
 						<div class="col-sm-10">
 							@if ($errors->has('menu_name'))<label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {{ $errors->first('menu_name') }}</label>@endif
-							<input type="text" class="form-control" placeholder="Nama Menu" name="menu_name" value="{{ $menu->menu_name }}" disabled>
-						</div>
-					</div>
-					
-					<div class="form-group @if ($errors->has('sub_menu_name')) has-error @endif">
-						<label class="col-sm-2 control-label">{{ __('Nama Sub Menu') }} <span class="required" style="color: #dd4b39;">*</span></label>
-						<div class="col-sm-10">
-							@if ($errors->has('sub_menu_name'))<label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {{ $errors->first('sub_menu_name') }}</label>@endif
-							<input type="text" class="form-control" placeholder="Nama Sub Menu" name="sub_menu_name" value="{{ old('sub_menu_name') }}" >
+							<input type="text" class="form-control" placeholder="Nama Menu" name="menu_name" value="{{ old('menu_name') }}" >
 						</div>
 					</div>
 					
@@ -85,7 +77,7 @@
 						<div class="col-sm-10">
 							<button type="submit" class="btn btn-primary btn-flat btn-sm" title="Tambah Data"> Simpan</button>
 							<button type="reset" class="btn btn-danger btn-flat btn-sm" title="Reset Data"> Reset</button>
-							<a href="{{ url('/'.Request::segment(1).'/'.$menu->id) }}" class="btn btn-warning btn-flat btn-sm" title="Kembali">Kembali</a>
+							<a href="{{ url('/'.Request::segment(1)) }}" class="btn btn-warning btn-flat btn-sm" title="Kembali">Kembali</a>
 						</div>
 					</div>
 					

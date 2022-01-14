@@ -19,8 +19,8 @@ class Group extends Model
         return $this->hasOne('App\Models\User');
     }
     
-    public function access()
+    public function menu_access()
     {
-        return $this->hasOne('App\Models\Access');
+        return $this->hasOne('App\Models\MenuAccess');
     }
 }
