@@ -30,7 +30,11 @@ class UserController extends Controller
     {
         $title = "User";
         $user = $request->get('search');
-		$user = User::where('name', 'LIKE', '%'.$user.'%')->orderBy('id','DESC')->paginate(10);
+		$user = User::
+                where(function ($query) use ($user) {
+                    $query->where('name', 'LIKE', '%'.$user.'%')
+                        ->orWhere('email', 'LIKE', '%'.$user.'%');
+                })->orderBy('id','DESC')->paginate(10);
 		return view('admin.user.index',compact('title','user'));
     }
 	

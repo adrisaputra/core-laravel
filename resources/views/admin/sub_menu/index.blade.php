@@ -23,7 +23,7 @@
 			</div>
 			<div class="box-tools pull-right">
 				<div class="form-inline">
-					<form action="{{ url('/'.Request::segment(1).'/search') }}" method="GET">
+					<form action="{{ url('/'.Request::segment(1).'/search/'.$menu->id) }}" method="GET">
 						<div class="input-sub_menu margin">
 							<input type="text" class="form-control" name="search" placeholder="Masukkan kata kunci pencarian">
 							<span class="input-sub_menu-btn">

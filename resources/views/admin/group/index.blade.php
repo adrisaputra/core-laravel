@@ -15,7 +15,9 @@
 		<div class="box-header with-border">
 			<div class="box-tools pull-left">
 				<div style="padding-top:10px">
-					<a href="{{ url('/'.Request::segment(1).'/create') }}" class="btn btn-success btn-flat" title="Tambah Data">Tambah</a>
+					@can('tambah-data')
+						<a href="{{ url('/'.Request::segment(1).'/create') }}" class="btn btn-success btn-flat" title="Tambah Data">Tambah</a>
+					@endcan
 					<a href="{{ url('/'.Request::segment(1)) }}" class="btn btn-warning btn-flat" title="Refresh halaman">Refresh</a>
 				</div>
 			</div>
@@ -33,6 +35,7 @@
 			</div>
 		</div>
 			
+		@can('read-data')
 			<div class="table-responsive box-body">
 
 				@if ($message = Session::get('status'))
@@ -55,14 +58,19 @@
 						<td>{{ $v->group_name }}</td>
 						<td>
 							<a href="{{ url('/menu_akses/'.$v->id ) }}" class="btn btn-xs btn-flat btn-info">Menu Akses</a>
-							<a href="{{ url('/'.Request::segment(1).'/edit/'.$v->id ) }}" class="btn btn-xs btn-flat btn-warning">Edit</a>
-							<a href="{{ url('/'.Request::segment(1).'/hapus/'.$v->id ) }}" class="btn btn-xs btn-flat btn-danger"  onclick="return confirm('Anda Yakin ?');">Hapus</a>
+							@can('ubah-data')
+								<a href="{{ url('/'.Request::segment(1).'/edit/'.$v->id ) }}" class="btn btn-xs btn-flat btn-warning">Edit</a>
+							@endcan
+							@can('hapus-data')
+								<a href="{{ url('/'.Request::segment(1).'/hapus/'.$v->id ) }}" class="btn btn-xs btn-flat btn-danger"  onclick="return confirm('Anda Yakin ?');">Hapus</a>
+							@endcan
 						</td>
 					</tr>
 					@endforeach
 				</table>
 
 			</div>
+		@endcan
 		<div class="box-footer">
 			<!-- PAGINATION -->
 			<div class="float-right">{{ $group->appends(Request::only('search'))->links() }}</div>

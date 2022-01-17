@@ -23,7 +23,7 @@
 			</div>
 			<div class="box-tools pull-right">
 				<div class="form-inline">
-					<form action="{{ url('/'.Request::segment(1).'/search') }}" method="GET">
+					<form action="{{ url('/'.Request::segment(1).'/search/'.$group->id) }}" method="GET">
 						<div class="input-group margin">
 							<input type="text" class="form-control" name="search" placeholder="Masukkan kata kunci pencarian">
 							<span class="input-group-btn">
@@ -64,11 +64,31 @@
 						@if($v->menu->link=="#")
 							<td colspan=5></td>
 						@else
-							<td>{{ $v->create }}</td>
-							<td>{{ $v->read }}</td>
-							<td>{{ $v->update }}</td>
-							<td>{{ $v->delete }}</td>
-							<td>{{ $v->print }}</td>
+							<td>
+								@if($v->create==1)
+									<i class="fa fa-check text-green"></i>
+								@endif
+							</td>
+							<td>
+								@if($v->read==1)
+									<i class="fa fa-check text-green"></i>
+								@endif
+							</td>
+							<td>
+								@if($v->update==1)
+									<i class="fa fa-check text-green"></i>
+								@endif
+							</td>
+							<td>
+								@if($v->delete==1)
+									<i class="fa fa-check text-green"></i>
+								@endif
+							</td>
+							<td>
+								@if($v->print==1)
+									<i class="fa fa-check text-green"></i>
+								@endif
+							</td>
 						@endif
 						<td>
 							@if($v->menu->link=="#")

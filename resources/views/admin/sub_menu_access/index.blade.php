@@ -23,7 +23,7 @@
 			</div>
 			<div class="box-tools pull-right">
 				<div class="form-inline">
-					<form action="{{ url('/'.Request::segment(1).'/search') }}" method="GET">
+					<form action="{{ url('/'.Request::segment(1).'/search/'.$group->id.'/'.$menu->id) }}" method="GET">
 						<div class="input-sub_menu_access margin">
 							<input type="text" class="form-control" name="search" placeholder="Masukkan kata kunci pencarian">
 							<span class="input-sub_menu_access-btn">
@@ -60,11 +60,31 @@
 					<tr>
 						<td>{{ ($sub_menu_access ->currentpage()-1) * $sub_menu_access ->perpage() + $loop->index + 1 }}</td>
 						<td>{{ $v->sub_menu_name }}</td>
-						<td>{{ $v->create }}</td>
-						<td>{{ $v->read }}</td>
-						<td>{{ $v->update }}</td>
-						<td>{{ $v->delete }}</td>
-						<td>{{ $v->print }}</td>
+						<td>
+							@if($v->create==1)
+								<i class="fa fa-check text-green"></i>
+							@endif
+						</td>
+						<td>
+							@if($v->read==1)
+								<i class="fa fa-check text-green"></i>
+							@endif
+						</td>
+						<td>
+							@if($v->update==1)
+								<i class="fa fa-check text-green"></i>
+							@endif
+						</td>
+						<td>
+							@if($v->delete==1)
+								<i class="fa fa-check text-green"></i>
+							@endif
+						</td>
+						<td>
+							@if($v->print==1)
+								<i class="fa fa-check text-green"></i>
+							@endif
+						</td>
 						<td>
 							<a href="{{ url('/'.Request::segment(1).'/edit/'.$group->id.'/'.$menu->id.'/'.$v->id ) }}" class="btn btn-xs btn-flat btn-warning">Edit</a>
 							<a href="{{ url('/'.Request::segment(1).'/hapus/'.$group->id.'/'.$menu->id.'/'.$v->id ) }}" class="btn btn-xs btn-flat btn-danger"  onclick="return confirm('Anda Yakin ?');">Hapus</a>

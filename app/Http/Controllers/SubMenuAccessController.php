@@ -35,18 +35,20 @@ class SubMenuAccessController extends Controller
     }
 
     ## Tampilkan Data Search
-    public function search(Request $request, $id)
+    public function search(Request $request, $group_id,$menu_id)
     {
         $title = "Sub Menu Akses";
-        $group = Group::where('id',$id)->first();
-
+        $group = Group::where('id',$group_id)->first();
+        $menu = Menu::where('id',$menu_id)->first();
         $sub_menu_access = $request->get('search');
-        $sub_menu_access = SubMenuAccess::leftJoin('menu_access_tbl', 'menu_access_tbl.id', '=', 'sub_menu_access_tbl.menu_access_id')  
-                   ->where('group_id',$id)
-                   ->where('name', 'LIKE', '%'.$sub_menu_access.'%')
-                   ->orderBy('position','ASC')->paginate(25)->onEachSide(1);
+        $sub_menu_access = SubMenuAccess::select('sub_menu_access_tbl.*','sub_menu_name')
+                            ->leftJoin('sub_menu_tbl', 'sub_menu_tbl.id', '=', 'sub_menu_access_tbl.sub_menu_id')                
+                            ->where('group_id',$group_id)
+                            ->where('sub_menu_access_tbl.menu_id',$menu_id)
+                            ->where('sub_menu_name', 'LIKE', '%'.$sub_menu_access.'%')
+                            ->orderBy('position','ASC')->paginate(25)->onEachSide(1);
         
-        return view('admin.sub_menu_access.index',compact('title','group','sub_menu_access'));
+        return view('admin.sub_menu_access.index',compact('title','group','menu','sub_menu_access'));
     }
     
     ## Tampilkan Form Create

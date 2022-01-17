@@ -26,7 +26,9 @@ class MenuAccessController extends Controller
          $group = Group::where('id',$group_id)->first();
          $menu_access = MenuAccess::select('menu_access_tbl.*','menu_name')
                         ->leftJoin('menu_tbl', 'menu_access_tbl.menu_id', '=', 'menu_tbl.id')
-                        ->where('group_id',$group_id)->orderBy('position','ASC')->paginate(25)->onEachSide(1);
+                        ->where('group_id',$group_id)
+                        ->orderBy('position','ASC')
+                        ->paginate(25)->onEachSide(1);
          return view('admin.menu_access.index',compact('title','group','menu_access'));
      }
  
@@ -40,8 +42,9 @@ class MenuAccessController extends Controller
          $menu_access = MenuAccess::select('menu_access_tbl.*','menu_name')
                         ->leftJoin('menu_tbl', 'menu_access_tbl.menu_id', '=', 'menu_tbl.id')
                         ->where('group_id',$group_id)
-                        ->where('name', 'LIKE', '%'.$menu_access.'%')
-                        ->orderBy('position','ASC')->paginate(25)->onEachSide(1);
+                        ->where('menu_name', 'LIKE', '%'.$menu_access.'%')
+                        ->orderBy('position','ASC')
+                        ->paginate(25)->onEachSide(1);
          
          return view('admin.menu_access.index',compact('title','group','menu_access'));
      }

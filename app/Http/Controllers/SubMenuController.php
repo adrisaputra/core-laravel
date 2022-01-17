@@ -34,8 +34,9 @@ class SubMenuController extends Controller
          $menu = Menu::where('id',$id)->first();
 
          $sub_menu = $request->get('search');
-         $sub_menu = SubMenu::where('name', 'LIKE', '%'.$sub_menu.'%')
-                 ->orderBy('position','ASC')->paginate(25)->onEachSide(1);
+         $sub_menu = SubMenu::where('menu_id',$id)
+                    ->where('sub_menu_name', 'LIKE', '%'.$sub_menu.'%')
+                    ->orderBy('position','ASC')->paginate(25)->onEachSide(1);
          
          return view('admin.sub_menu.index',compact('title','menu','sub_menu'));
      }
