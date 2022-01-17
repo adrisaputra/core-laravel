@@ -28,8 +28,31 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::define('read-data', function ($user) {
-            $user  = User::leftJoin('menu_access_tbl', 'menu_access_tbl.id', '=', 'users.group_id')
-                        ->where('users.id',Auth::user()->id)->first();
+            $count_menu  = User::leftJoin('menu_access_tbl', 'menu_access_tbl.group_id', '=', 'users.group_id')
+                    ->leftJoin('menu_tbl', 'menu_access_tbl.menu_id', '=', 'menu_tbl.id')
+                    ->where('users.id',Auth::user()->id)
+                    ->where('menu_tbl.link',request()->segment(1))
+                    ->count();
+            $count_sub_menu  = User::leftJoin('sub_menu_access_tbl', 'sub_menu_access_tbl.group_id', '=', 'users.group_id')
+                    ->leftJoin('sub_menu_tbl', 'sub_menu_access_tbl.sub_menu_id', '=', 'sub_menu_tbl.id')
+                    ->where('users.id',Auth::user()->id)
+                    ->where('sub_menu_tbl.link',request()->segment(1))
+                    ->count();
+            if($count_menu==1){
+                $user  = User::leftJoin('menu_access_tbl', 'menu_access_tbl.group_id', '=', 'users.group_id')
+                        ->leftJoin('menu_tbl', 'menu_access_tbl.menu_id', '=', 'menu_tbl.id')
+                        ->where('users.id',Auth::user()->id)
+                        ->where('menu_tbl.link',request()->segment(1))
+                        ->first();
+            }
+            if($count_sub_menu==1){
+                $user  = User::leftJoin('sub_menu_access_tbl', 'sub_menu_access_tbl.group_id', '=', 'users.group_id')
+                        ->leftJoin('sub_menu_tbl', 'sub_menu_access_tbl.sub_menu_id', '=', 'sub_menu_tbl.id')
+                        ->where('users.id',Auth::user()->id)
+                        ->where('sub_menu_tbl.link',request()->segment(1))
+                        ->first();
+            }
+
             if($user->read==1){
                 return true;
             }
@@ -37,11 +60,30 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('tambah-data', function ($user) {
-            $user  = User::leftJoin('menu_access_tbl', 'menu_access_tbl.group_id', '=', 'users.group_id')
+            $count_menu  = User::leftJoin('menu_access_tbl', 'menu_access_tbl.group_id', '=', 'users.group_id')
+                    ->leftJoin('menu_tbl', 'menu_access_tbl.menu_id', '=', 'menu_tbl.id')
+                    ->where('users.id',Auth::user()->id)
+                    ->where('menu_tbl.link',request()->segment(1))
+                    ->count();
+            $count_sub_menu  = User::leftJoin('sub_menu_access_tbl', 'sub_menu_access_tbl.group_id', '=', 'users.group_id')
+                    ->leftJoin('sub_menu_tbl', 'sub_menu_access_tbl.sub_menu_id', '=', 'sub_menu_tbl.id')
+                    ->where('users.id',Auth::user()->id)
+                    ->where('sub_menu_tbl.link',request()->segment(1))
+                    ->count();
+            if($count_menu==1){
+                $user  = User::leftJoin('menu_access_tbl', 'menu_access_tbl.group_id', '=', 'users.group_id')
                         ->leftJoin('menu_tbl', 'menu_access_tbl.menu_id', '=', 'menu_tbl.id')
                         ->where('users.id',Auth::user()->id)
                         ->where('menu_tbl.link',request()->segment(1))
                         ->first();
+            }
+            if($count_sub_menu==1){
+                $user  = User::leftJoin('sub_menu_access_tbl', 'sub_menu_access_tbl.group_id', '=', 'users.group_id')
+                        ->leftJoin('sub_menu_tbl', 'sub_menu_access_tbl.sub_menu_id', '=', 'sub_menu_tbl.id')
+                        ->where('users.id',Auth::user()->id)
+                        ->where('sub_menu_tbl.link',request()->segment(1))
+                        ->first();
+            }
             if($user->create==1){
                 return true;
             }
@@ -49,11 +91,30 @@ class AuthServiceProvider extends ServiceProvider
         });
         
         Gate::define('ubah-data', function ($user) {
-            $user  = User::leftJoin('menu_access_tbl', 'menu_access_tbl.group_id', '=', 'users.group_id')
+            $count_menu  = User::leftJoin('menu_access_tbl', 'menu_access_tbl.group_id', '=', 'users.group_id')
+                    ->leftJoin('menu_tbl', 'menu_access_tbl.menu_id', '=', 'menu_tbl.id')
+                    ->where('users.id',Auth::user()->id)
+                    ->where('menu_tbl.link',request()->segment(1))
+                    ->count();
+            $count_sub_menu  = User::leftJoin('sub_menu_access_tbl', 'sub_menu_access_tbl.group_id', '=', 'users.group_id')
+                    ->leftJoin('sub_menu_tbl', 'sub_menu_access_tbl.sub_menu_id', '=', 'sub_menu_tbl.id')
+                    ->where('users.id',Auth::user()->id)
+                    ->where('sub_menu_tbl.link',request()->segment(1))
+                    ->count();
+            if($count_menu==1){
+                $user  = User::leftJoin('menu_access_tbl', 'menu_access_tbl.group_id', '=', 'users.group_id')
                         ->leftJoin('menu_tbl', 'menu_access_tbl.menu_id', '=', 'menu_tbl.id')
                         ->where('users.id',Auth::user()->id)
                         ->where('menu_tbl.link',request()->segment(1))
                         ->first();
+            }
+            if($count_sub_menu==1){
+                $user  = User::leftJoin('sub_menu_access_tbl', 'sub_menu_access_tbl.group_id', '=', 'users.group_id')
+                        ->leftJoin('sub_menu_tbl', 'sub_menu_access_tbl.sub_menu_id', '=', 'sub_menu_tbl.id')
+                        ->where('users.id',Auth::user()->id)
+                        ->where('sub_menu_tbl.link',request()->segment(1))
+                        ->first();
+            }
             if($user->update==1){
                 return true;
             }
@@ -61,11 +122,30 @@ class AuthServiceProvider extends ServiceProvider
         });
         
         Gate::define('hapus-data', function ($user) {
-            $user  = User::leftJoin('menu_access_tbl', 'menu_access_tbl.group_id', '=', 'users.group_id')
+            $count_menu  = User::leftJoin('menu_access_tbl', 'menu_access_tbl.group_id', '=', 'users.group_id')
+                    ->leftJoin('menu_tbl', 'menu_access_tbl.menu_id', '=', 'menu_tbl.id')
+                    ->where('users.id',Auth::user()->id)
+                    ->where('menu_tbl.link',request()->segment(1))
+                    ->count();
+            $count_sub_menu  = User::leftJoin('sub_menu_access_tbl', 'sub_menu_access_tbl.group_id', '=', 'users.group_id')
+                    ->leftJoin('sub_menu_tbl', 'sub_menu_access_tbl.sub_menu_id', '=', 'sub_menu_tbl.id')
+                    ->where('users.id',Auth::user()->id)
+                    ->where('sub_menu_tbl.link',request()->segment(1))
+                    ->count();
+            if($count_menu==1){
+                $user  = User::leftJoin('menu_access_tbl', 'menu_access_tbl.group_id', '=', 'users.group_id')
                         ->leftJoin('menu_tbl', 'menu_access_tbl.menu_id', '=', 'menu_tbl.id')
                         ->where('users.id',Auth::user()->id)
                         ->where('menu_tbl.link',request()->segment(1))
                         ->first();
+            }
+            if($count_sub_menu==1){
+                $user  = User::leftJoin('sub_menu_access_tbl', 'sub_menu_access_tbl.group_id', '=', 'users.group_id')
+                        ->leftJoin('sub_menu_tbl', 'sub_menu_access_tbl.sub_menu_id', '=', 'sub_menu_tbl.id')
+                        ->where('users.id',Auth::user()->id)
+                        ->where('sub_menu_tbl.link',request()->segment(1))
+                        ->first();
+            }
             if($user->delete==1){
                 return true;
             }
@@ -73,11 +153,30 @@ class AuthServiceProvider extends ServiceProvider
         });
         
         Gate::define('print-data', function ($user) {
-            $user  = User::leftJoin('menu_access_tbl', 'menu_access_tbl.group_id', '=', 'users.group_id')
+            $count_menu  = User::leftJoin('menu_access_tbl', 'menu_access_tbl.group_id', '=', 'users.group_id')
+                    ->leftJoin('menu_tbl', 'menu_access_tbl.menu_id', '=', 'menu_tbl.id')
+                    ->where('users.id',Auth::user()->id)
+                    ->where('menu_tbl.link',request()->segment(1))
+                    ->count();
+            $count_sub_menu  = User::leftJoin('sub_menu_access_tbl', 'sub_menu_access_tbl.group_id', '=', 'users.group_id')
+                    ->leftJoin('sub_menu_tbl', 'sub_menu_access_tbl.sub_menu_id', '=', 'sub_menu_tbl.id')
+                    ->where('users.id',Auth::user()->id)
+                    ->where('sub_menu_tbl.link',request()->segment(1))
+                    ->count();
+            if($count_menu==1){
+                $user  = User::leftJoin('menu_access_tbl', 'menu_access_tbl.group_id', '=', 'users.group_id')
                         ->leftJoin('menu_tbl', 'menu_access_tbl.menu_id', '=', 'menu_tbl.id')
                         ->where('users.id',Auth::user()->id)
                         ->where('menu_tbl.link',request()->segment(1))
                         ->first();
+            }
+            if($count_sub_menu==1){
+                $user  = User::leftJoin('sub_menu_access_tbl', 'sub_menu_access_tbl.group_id', '=', 'users.group_id')
+                        ->leftJoin('sub_menu_tbl', 'sub_menu_access_tbl.sub_menu_id', '=', 'sub_menu_tbl.id')
+                        ->where('users.id',Auth::user()->id)
+                        ->where('sub_menu_tbl.link',request()->segment(1))
+                        ->first();
+            }
             if($user->print==1){
                 return true;
             }

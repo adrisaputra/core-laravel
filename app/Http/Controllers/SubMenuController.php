@@ -23,8 +23,8 @@ class SubMenuController extends Controller
      {
          $title = "Sub Menu";
          $menu = Menu::where('id',$id)->first();
-         $submenu = SubMenu::where('menu_id',$id)->orderBy('position','ASC')->paginate(25)->onEachSide(1);
-         return view('admin.submenu.index',compact('title','menu','submenu'));
+         $sub_menu = SubMenu::where('menu_id',$id)->orderBy('position','ASC')->paginate(25)->onEachSide(1);
+         return view('admin.sub_menu.index',compact('title','menu','sub_menu'));
      }
  
      ## Tampilkan Data Search
@@ -33,11 +33,11 @@ class SubMenuController extends Controller
          $title = "Sub Menu";
          $menu = Menu::where('id',$id)->first();
 
-         $submenu = $request->get('search');
-         $submenu = SubMenu::where('name', 'LIKE', '%'.$submenu.'%')
+         $sub_menu = $request->get('search');
+         $sub_menu = SubMenu::where('name', 'LIKE', '%'.$sub_menu.'%')
                  ->orderBy('position','ASC')->paginate(25)->onEachSide(1);
          
-         return view('admin.submenu.index',compact('title','menu','submenu'));
+         return view('admin.sub_menu.index',compact('title','menu','sub_menu'));
      }
      
      ## Tampilkan Form Create
@@ -45,7 +45,7 @@ class SubMenuController extends Controller
      {
          $title = "Sub Menu";
          $menu = Menu::where('id',$id)->first();
-         $view=view('admin.submenu.create',compact('title','menu'));
+         $view=view('admin.sub_menu.create',compact('title','menu'));
          $view=$view->render();
          return $view;
      }
@@ -72,21 +72,21 @@ class SubMenuController extends Controller
          SubMenu::create($input);
          
          activity()->log('Tambah Data Sub Menu');
-         return redirect('/submenu/'.$id)->with('status','Data Tersimpan');
+         return redirect('/sub_menu/'.$id)->with('status','Data Tersimpan');
      }
  
      ## Tampilkan Form Edit
-     public function edit($id, SubMenu $submenu)
+     public function edit($id, SubMenu $sub_menu)
      {
          $title = "Sub Menu";
          $menu = Menu::where('id',$id)->first();
-         $view=view('admin.submenu.edit', compact('title','menu','submenu'));
+         $view=view('admin.sub_menu.edit', compact('title','menu','sub_menu'));
          $view=$view->render();
          return $view;
      }
  
      ## Edit Data
-     public function update(Request $request, $id, SubMenu $submenu)
+     public function update(Request $request, $id, SubMenu $sub_menu)
      {
         $this->validate($request, [
             'sub_menu_name' => 'required',
@@ -95,21 +95,21 @@ class SubMenuController extends Controller
             'status' => 'required',
         ]);
  
-         $submenu->fill($request->all());
+         $sub_menu->fill($request->all());
          
-         $submenu->user_id = Auth::user()->id;
-         $submenu->save();
+         $sub_menu->user_id = Auth::user()->id;
+         $sub_menu->save();
          
-         activity()->log('Ubah Data Sub Menu dengan ID = '.$submenu->id);
-         return redirect('/submenu/'.$id)->with('status', 'Data Berhasil Diubah');
+         activity()->log('Ubah Data Sub Menu dengan ID = '.$sub_menu->id);
+         return redirect('/sub_menu/'.$id)->with('status', 'Data Berhasil Diubah');
      }
  
      ## Hapus Data
-     public function delete(SubMenu $submenu)
+     public function delete(SubMenu $sub_menu)
      {
-         $submenu->delete();
+         $sub_menu->delete();
  
-         activity()->log('Hapus Data Sub Menu dengan ID = '.$submenu->id);
-         return redirect('/submenu')->with('status', 'Data Berhasil Dihapus');
+         activity()->log('Hapus Data Sub Menu dengan ID = '.$sub_menu->id);
+         return redirect('/sub_menu')->with('status', 'Data Berhasil Dihapus');
      }
 }

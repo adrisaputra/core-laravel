@@ -24,9 +24,9 @@
 			<div class="box-tools pull-right">
 				<div class="form-inline">
 					<form action="{{ url('/'.Request::segment(1).'/search') }}" method="GET">
-						<div class="input-submenu margin">
+						<div class="input-sub_menu margin">
 							<input type="text" class="form-control" name="search" placeholder="Masukkan kata kunci pencarian">
-							<span class="input-submenu-btn">
+							<span class="input-sub_menu-btn">
 								<button type="submit" class="btn btn-danger btn-flat">cari</button>
 							</span>
 						</div>
@@ -51,15 +51,17 @@
 						<th>Nama Sub Menu</th>
 						<th>Link</th>
 						<th>Atribute</th>
+						<th>Posisi</th>
 						<th>Status</th>
 						<th style="width: 15%">#Aksi</th>
 					</tr>
-					@foreach($submenu as $v)
+					@foreach($sub_menu as $v)
 					<tr>
-						<td>{{ ($submenu ->currentpage()-1) * $submenu ->perpage() + $loop->index + 1 }}</td>
+						<td>{{ ($sub_menu ->currentpage()-1) * $sub_menu ->perpage() + $loop->index + 1 }}</td>
 						<td>{{ $v->sub_menu_name }}</td>
 						<td>{{ $v->link }}</td>
 						<td>{{ $v->attribute }}</td>
+						<td>{{ $v->position }}</td>
 						<td>
 							@if ($v->status==0)
 								<span class="label label-danger">Tidak Aktif</span>
@@ -78,7 +80,7 @@
 			</div>
 		<div class="box-footer">
 			<!-- PAGINATION -->
-			<div class="float-right">{{ $submenu->appends(Request::only('search'))->links() }}</div>
+			<div class="float-right">{{ $sub_menu->appends(Request::only('search'))->links() }}</div>
 		</div>
 	</div>
 	</section>

@@ -49,6 +49,7 @@
 						<th>Nama menu</th>
 						<th>Link</th>
 						<th>Atribute</th>
+						<th>Posisi</th>
 						<th>Status</th>
 						<th style="width: 15%">#Aksi</th>
 					</tr>
@@ -58,6 +59,7 @@
 						<td>{{ $v->menu_name }}</td>
 						<td>{{ $v->link }}</td>
 						<td>{{ $v->attribute }}</td>
+						<td>{{ $v->position }}</td>
 						<td>
 							@if ($v->status==0)
 								<span class="label label-danger">Tidak Aktif</span>
@@ -67,7 +69,7 @@
 						</td>
 						<td>
 							@if($v->link=="#")
-								<a href="{{ url('/submenu/'.$v->id ) }}" class="btn btn-xs btn-flat btn-info">Sub Menu</a>
+								<a href="{{ url('/sub_menu/'.$v->id ) }}" class="btn btn-xs btn-flat btn-info">Sub Menu</a>
 							@endif
 							<a href="{{ url('/'.Request::segment(1).'/edit/'.$v->id ) }}" class="btn btn-xs btn-flat btn-warning">Edit</a>
 							<a href="{{ url('/'.Request::segment(1).'/hapus/'.$v->id ) }}" class="btn btn-xs btn-flat btn-danger"  onclick="return confirm('Anda Yakin ?');">Hapus</a>

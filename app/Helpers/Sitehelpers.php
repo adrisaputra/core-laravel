@@ -5,6 +5,7 @@ namespace App\Helpers;
 use App\Models\Menu;   //nama model
 use App\Models\SubMenu;   //nama model
 use App\Models\MenuAccess;   //nama model
+use App\Models\SubMenuAccess;   //nama model
 use Illuminate\Support\Facades\Auth;
 
 class SiteHelpers
@@ -34,9 +35,14 @@ class SiteHelpers
         return $menu;
     }
 
-    public static function submenu($id)
+    public static function submenu($menu_id)
     {
-        $submenu = SubMenu::where('menu_id',$id)->where('status',1)->orderBy('position','ASC')->get();
+        $submenu = SubMenuAccess::leftJoin('group_tbl', 'sub_menu_access_tbl.group_id', '=', 'group_tbl.id')
+                    ->leftJoin('sub_menu_tbl', 'sub_menu_access_tbl.sub_menu_id', '=', 'sub_menu_tbl.id')
+                    ->where('sub_menu_access_tbl.group_id',Auth::user()->group_id)
+                    ->where('sub_menu_tbl.status',1)
+                    ->where('sub_menu_tbl.menu_id',$menu_id)
+                    ->orderBy('position','ASC')->get();
         return $submenu;
     }
 

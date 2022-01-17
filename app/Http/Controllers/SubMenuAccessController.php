@@ -27,8 +27,10 @@ class SubMenuAccessController extends Controller
         $group = Group::where('id',$group_id)->first();
         $menu = Menu::where('id',$menu_id)->first();
         $sub_menu_access = SubMenuAccess::select('sub_menu_access_tbl.*','sub_menu_name')
-                        ->leftJoin('sub_menu_tbl', 'sub_menu_tbl.id', '=', 'sub_menu_access_tbl.menu_id')                
-                        ->where('group_id',$group_id)->orderBy('position','ASC')->paginate(25)->onEachSide(1);
+                        ->leftJoin('sub_menu_tbl', 'sub_menu_tbl.id', '=', 'sub_menu_access_tbl.sub_menu_id')                
+                        ->where('group_id',$group_id)
+                        ->where('sub_menu_access_tbl.menu_id',$menu_id)
+                        ->orderBy('position','ASC')->paginate(25)->onEachSide(1);
         return view('admin.sub_menu_access.index',compact('title','group','menu','sub_menu_access'));
     }
 

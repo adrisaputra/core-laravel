@@ -12,8 +12,8 @@ class SubMenu extends Model
 	protected $fillable =[
         'menu_id',
         'sub_menu_name',
-        'attribute',
         'link',
+        'attribute',
         'position',
         'desc',
         'status',
