@@ -59,8 +59,9 @@
 							@if ($errors->has('group_id'))<label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {{ $errors->first('group_id') }}</label>@endif
 							<select class="form-control" name="group_id">
 								<option value="">- Pilih Group -</option>
-								<option value="1" @if(old('group_id')=="1") selected @endif>Administrator</option>
-								<option value="2" @if(old('group_id')=="2") selected @endif>Operator</option>
+								@foreach($group as $v)
+									<option value="{{ $v->id }}" @if(old('group_id')=="$v->id") selected @endif>{{ $v->group_name }}</option>
+								@endforeach
 								<!-- <option value="3" @if(old('group_id')=="3") selected @endif>Pegawai</option> -->
 							</select>
 

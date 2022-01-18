@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;   //nama model
-use App\Models\Pegawai;   //nama model
+use App\Models\Group;   //nama model
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB; //untuk membuat query di controller
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +21,7 @@ class UserController extends Controller
     public function index()
     {
         $title = "User";
-		$user = DB::table('users')->orderBy('id','DESC')->paginate(10);
+		$user = User::orderBy('id','DESC')->paginate(10);
 		return view('admin.user.index',compact('title','user'));
     }
 	
@@ -42,7 +42,8 @@ class UserController extends Controller
 	public function create()
     {
         $title = "User";
-        $view=view('admin.user.create',compact('title'));
+        $group = Group::get();
+        $view=view('admin.user.create',compact('title','group'));
         $view=$view->render();
         return $view;
     }
@@ -74,7 +75,8 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $title = "User";
-        $view=view('admin.user.edit', compact('title','user'));
+        $group = Group::get();
+        $view=view('admin.user.edit', compact('title','user','group'));
         $view=$view->render();
 		return $view;
     }

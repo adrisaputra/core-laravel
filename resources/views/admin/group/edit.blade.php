@@ -18,7 +18,7 @@
 		
 		<form action="{{ url('/'.Request::segment(1).'/edit/'.$group->id) }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
 		{{ csrf_field() }}
-		<input type="hidden" group_name="_method" value="PUT">
+		<input type="hidden" name="_method" value="PUT">
 		
 			<div class="box-body">
 				<div class="col-lg-12">

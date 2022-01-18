@@ -62,9 +62,15 @@
 						<td>{{ $v->email }}</td>
 						<td>
 							@if ($v->group_id==1)
-								<span class="label label-danger">Administrator</span>
+								<span class="label label-danger">{{ $v->group->group_name}}</span>
 							@elseif  ($v->group_id==2)
-								<span class="label label-warning">Operator</span>
+								<span class="label label-warning">{{ $v->group->group_name}}</span>
+							@elseif  ($v->group_id==3)
+								<span class="label label-info">{{ $v->group->group_name}}</span>
+							@elseif  ($v->group_id==4)
+								<span class="label label-success">{{ $v->group->group_name}}</span>
+							@else
+								<span class="label label-primary">{{ $v->group->group_name}}</span>
 							@endif
 						</td>
 						<td>

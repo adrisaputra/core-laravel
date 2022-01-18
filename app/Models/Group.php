@@ -10,7 +10,7 @@ class Group extends Model
     // use HasFactory;
 	protected $table = 'group_tbl';
 	protected $fillable =[
-        'name',
+        'group_name',
         'user_id'
     ];
 
