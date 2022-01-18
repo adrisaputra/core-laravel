@@ -106,11 +106,11 @@ class SubMenuController extends Controller
      }
  
      ## Hapus Data
-     public function delete(SubMenu $sub_menu)
+     public function delete($id, SubMenu $sub_menu)
      {
          $sub_menu->delete();
  
          activity()->log('Hapus Data Sub Menu dengan ID = '.$sub_menu->id);
-         return redirect('/sub_menu')->with('status', 'Data Berhasil Dihapus');
+         return redirect('/sub_menu/'.$id)->with('status', 'Data Berhasil Dihapus');
      }
 }
